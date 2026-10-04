@@ -1,3 +1,7 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "qet-ml"
 version = "0.1.0"
@@ -7,6 +11,10 @@ dependencies = [
   "cryptography>=43",
   "pytest>=8",
 ]
+
+[tool.setuptools]
+package-dir = {"" = "reference"}
+py-modules = ["qet_codec"]
 
 [tool.pytest.ini_options]
 pythonpath = ["reference"]
