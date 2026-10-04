@@ -9,19 +9,23 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Install elan
+        run: |
+          set -euo pipefail
+          curl -sSfL https://github.com/leanprover/elan/releases/download/v4.2.2/elan-x86_64-unknown-linux-gnu.tar.gz | tar xz
+          ./elan-init -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install Lean toolchain
-        uses: leanprover/lean-action@v1
-        with:
-          auto-config: false
-          build: false
-          test: false
-          lint: false
+      - name: Lean version
+        run: |
+          lean --version
+          lake --version
 
       - name: Resolve dependencies
         run: lake update
 
       - name: Build
-        run: lake build
+        run: lake --no-ansi build
