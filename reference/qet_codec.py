@@ -233,7 +233,7 @@ class _Parser:
             return Expr.modifier(modifier, body)
         if self.peek("S["):
             self.i += 2
-            items = self.parse_bracket_list()
+            items = self.parse_bracket_list(already_open=True)
             return Expr.sequence(items)
         raise ValueError(f"unknown expression at offset {self.i}")
 
