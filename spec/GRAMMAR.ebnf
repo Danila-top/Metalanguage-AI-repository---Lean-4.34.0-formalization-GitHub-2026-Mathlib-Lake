@@ -1,0 +1,44 @@
+(* QET-ML v0.1 normative grammar *)
+
+message       = init, header, "|", expr, "|", confirm, close ;
+init          = "※" ;
+confirm       = "◎" ;
+close         = "◉" ;
+
+header        = version, "/", sender, "/", recipient ;
+version       = "v", integer ;
+sender        = "s", integer ;
+recipient     = "r", integer ;
+
+expr          = atom | operation | modifier | sequence ;
+atom          = concept | number | text | boolean ;
+concept       = "C", integer ;
+number        = "N", signed-integer ;
+text          = "T", base64url ;
+boolean       = "B0" | "B1" ;
+
+operation     = "O", operator-id, "[", argument-list, "]" ;
+modifier      = "M", modifier-id, "[", expr, "]" ;
+sequence      = "S[", expr-list, "]" ;
+
+argument-list = expr-list | empty ;
+expr-list    = expr, { ",", expr } ;
+empty        = "" ;
+
+operator-id   = "20" | "21" | "22" ;
+modifier-id  = "30" | "31" | "32" | "33" | "34" | "35" ;
+
+signed-integer = [ "-" ], digit, { digit } ;
+integer        = digit, { digit } ;
+digit          = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" ;
+
+base64url = { base64url-char } ;
+base64url-char =
+    digit
+  | "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M"
+  | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z"
+  | "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m"
+  | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z"
+  | "-" | "_" ;
+
+(* Legacy aliases: OP=20, SR=21, FL=22, @E=30, @C=31, @T=32, @R=33. *)
