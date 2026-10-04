@@ -3,6 +3,10 @@ import QET.Grammar
 import QET.Lexicon
 import QET.Protocol
 import QET.Semantics
+import QET.Typing
+import QET.Relations
+import QET.Extensions
+import QET.Security
 
 namespace QET
 
