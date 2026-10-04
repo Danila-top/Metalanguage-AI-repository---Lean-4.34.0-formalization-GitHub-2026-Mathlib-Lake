@@ -7,6 +7,7 @@ import QET.Typing
 import QET.Relations
 import QET.Extensions
 import QET.Security
+import QET.Agent
 
 namespace QET
 
