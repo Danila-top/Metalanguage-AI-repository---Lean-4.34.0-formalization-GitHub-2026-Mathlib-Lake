@@ -12,12 +12,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Lean
+      - name: Install Lean toolchain
         uses: leanprover/lean-action@v1
         with:
-          lake-package-directory: .
+          auto-config: false
+          build: false
+          test: false
+          lint: false
 
-      - name: Fetch Mathlib
+      - name: Resolve dependencies
         run: lake update
 
       - name: Build
