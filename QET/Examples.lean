@@ -1,3 +1,4 @@
+import Mathlib
 import QET.Core
 import QET.Grammar
 import QET.Lexicon
@@ -22,7 +23,7 @@ def exampleMessage : Message :=
         ] }
 
 example : exampleMessage.WellFormed := by
-  repeat' constructor <;> simp [exampleMessage, Expr.WellFormed]
+  simp [Message.WellFormed, exampleMessage, Expr.WellFormed]
 
 example :
     (encodeMessage exampleMessage).head? = some Token.init := by
